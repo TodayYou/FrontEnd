@@ -1,0 +1,127 @@
+.letters-container {
+    text-align: center;
+}
+
+.letters-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.letter-item {
+    width: 80%;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: left;
+    transition: background-color 0.3s;
+    position: relative; /* Position relative for delete button positioning */
+}
+
+.letter-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit color from parent */
+}
+
+.letter-item.read {
+    background-color: #e6e6e6; /* 확인한 편지의 배경색 */
+}
+
+.letter-item.unread {
+    background-color: #f9f9f9; /* 확인하지 않은 편지의 배경색 */
+}
+
+.letter-item:hover {
+    background-color: #f1f1f1;
+}
+
+.letter-item h2 {
+    margin-top: 0;
+}
+
+.letter-item p {
+    margin: 0.5rem 0;
+}
+
+.delete-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
+
+/* Remaining styles unchanged */
+.sent-letter-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 80vh; /* 전체 높이 설정 */
+    justify-content: space-between; /* 상단과 하단에 요소 분리 */
+    position: relative;
+}
+
+.sent-letter-detail-container {
+    width: 100%;
+    max-width: 80%; /* 고정된 넓이 */
+    height: 50%;
+    max-height: 60%;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem; /* 상단 여백 추가 */
+}
+
+.back-button {
+    width: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    padding-top: 0.5rem;
+    background-color: #bad8f9;
+}
+
+.back-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.sent-letter-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sent-letter-title {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.sent-letter-meta {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+}
+
+.sent-letter-content {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    text-align: left;
+}

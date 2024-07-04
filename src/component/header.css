@@ -1,0 +1,38 @@
+.App-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #e4f1f9;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed; /* 헤더를 페이지 상단에 고정 */
+  left: 0;
+  top:0;
+  z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+}
+
+.back-button {
+  position: absolute;
+  left: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.logo {
+  text-align: center;
+  margin-top:5rem;
+}
+
+.logo svg {
+  width: 10rem; /* 로고 크기 조정 */
+  height: auto;
+}

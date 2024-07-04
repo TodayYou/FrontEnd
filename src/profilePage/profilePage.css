@@ -1,0 +1,62 @@
+.profile-body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-header {
+    margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .logo-header svg {
+    width: 60%; /* 로고 크기 조정 */
+    max-width: 200px; /* 로고 최대 크기 */
+    height: auto;
+  }
+  
+  .profile-container {
+    text-align: center;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+  }
+  
+  .profile-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-container p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .profile-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size:15px;
+  }
+  
+  .profile-button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
