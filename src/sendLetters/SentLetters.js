@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SentLetters.css';
 
 import Header from '../component/header';
-
-// 더미 데이터 (보낸 편지 목록)
-const initialSentLetters = [
-  { id: 1, title: 'Hello World', content: 'This is a reply to hello world.', author: 'You', recipient: 'Alice', date: '2023-07-02' },
-  { id: 2, title: 'React Tips', content: 'These are some tips in response to your React tips.', author: 'You', recipient: 'Bob', date: '2023-07-03' },
-  { id: 3, title: 'CSS Tricks', content: 'These are some tricks in response to your CSS tricks.', author: 'You', recipient: 'Charlie', date: '2023-07-04' },
-];
+import todayYouAxios from '../apis/axios';
 
 const SentLetters = () => {
-  const [sentLetters, setSentLetters] = useState(initialSentLetters);
+  const [sentLetters, setSentLetters] = useState([]);
+  const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage
 
-  const handleDelete = (id) => {
-    setSentLetters(sentLetters.filter(letter => letter.id !== id));
+  useEffect(() => {
+    const fetchLetters = async () => {
+      try {
+        const response = await todayYouAxios.get(`/api/letters/sent/${userId}`);
+        setSentLetters(response.data);
+      } catch (error) {
+        console.error('Error fetching letters:', error);
+      }
+    };
+
+    fetchLetters();
+  }, [userId]);
+
+  const handleDelete = async (letterId) => {
+    try {
+      await todayYouAxios.delete(`/api/letters/sent/${userId}/${letterId}`);
+      setSentLetters(sentLetters.filter(letter => letter.id !== letterId));
+    } catch (error) {
+      console.error('Error deleting letter:', error);
+    }
   };
 
   return (

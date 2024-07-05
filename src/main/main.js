@@ -2,33 +2,40 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import './main.css';
+import axios from "axios";
 import Logo from '../component/Logo'; // Logo 컴포넌트 불러오기
-import todayYouAxios from '../apis/axios.js';
+// import todayYouAxios from '../apis/axios.js';
 
 function Main() {
   const [nickname, setNickname] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // 회원가입 로직 추가
     try {
-      const response = await todayYouAxios.post('/api/users', {
+      const response = await axios.post('http://localhost:8080/api/users', {
         username: nickname,
         password: password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
-      console.log('회원가입 성공:', response.data);
-      // 토큰 저장 (필요한 경우)
-      localStorage.setItem('accessToken', response.data.accessToken);
+      const { token, userId } = response.data;
+      localStorage.setItem('accessToken', token);
+      localStorage.setItem('userId',userId);
+
       // 폼 리셋
       setNickname('');
-      setPassword('');  
+      setPassword('');
+
       // /options 페이지로 이동
       navigate('/options');
     } catch (error) {
-      console.error('회원가입 실패:', error.response?.data || error.message);
+      console.error("회원가입 중 오류 발생:", error);
     }
   };
 
@@ -50,16 +57,6 @@ function Main() {
               required
             />
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="name">이름</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div> */}
           <div className="form-group">
             <label htmlFor="password">비밀번호</label>
             <input

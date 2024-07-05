@@ -12,4 +12,18 @@ export const todayYouAxios = axios.create({
   },
 });
 
+// 요청 인터셉터를 추가하여 토큰을 항상 헤더에 추가
+todayYouAxios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("accessToken"); // 항상 최신 토큰을 가져옴
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export default todayYouAxios;

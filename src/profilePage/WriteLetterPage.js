@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './WriteLetterPage.css';
 import Header from '../component/header';
-
-// 더미 데이터 (실제 데이터는 서버에서 가져와야 함)
-const userProfiles = [
-  { id: 1, nickname: 'Alice' },
-  { id: 2, nickname: 'Bob' },
-  { id: 3, nickname: 'Charlie' },
-];
+import todayYouAxios from '../apis/axios';
 
 const WriteLetterPage = () => {
   const { profileId } = useParams();
-  const userProfile = userProfiles.find(profile => profile.id === parseInt(profileId));
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [recipientName, setRecipientName] = useState('');
   const navigate = useNavigate();
 
-  if (!userProfile) {
-    return <div>프로필을 찾을 수 없습니다.</div>;
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // 편지 저장 로직 추가 (예: 서버에 저장)
-    console.log(`To: ${userProfile.nickname}, From: ${author}, Title: ${title}, Content: ${content}`);
-    navigate('/options'); // 옵션 페이지로 이동
+    try {
+      const userId = localStorage.getItem('userId');
+      const response = await todayYouAxios.post('/api/letters', {
+        title,
+        content,
+        author,
+        senderId: userId,
+        recipientId: profileId,
+        recipientName,
+        sentDate: new Date().toISOString(),
+        readStatus: false,
+      });
+
+      if (response.status === 200) {
+        alert('편지가 성공적으로 전송되었습니다.');
+        navigate(`/profile/${profileId}`);
+      }
+    } catch (error) {
+      console.error('편지 전송 중 오류가 발생했습니다:', error);
+      alert('편지 전송 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -51,8 +59,16 @@ const WriteLetterPage = () => {
             style={{ width: '90%', padding: '1rem', marginBottom: '1rem', borderRadius: '4px', border: '1px solid #ddd' }}
             required
           />
+          <input
+            type="text"
+            value={recipientName}
+            onChange={(e) => setRecipientName(e.target.value)}
+            placeholder="받는 사람 이름을 입력하세요"
+            style={{ width: '90%', padding: '1rem', marginBottom: '1rem', borderRadius: '4px', border: '1px solid #ddd' }}
+            required
+          />
           <textarea
-          className='input_content'
+            className='input_content'
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="편지 내용을 입력하세요"
