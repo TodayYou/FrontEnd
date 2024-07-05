@@ -15,7 +15,7 @@ function Main() {
     e.preventDefault();
     // 회원가입 로직 추가
     try {
-      const response = await axios.post('http://localhost:8080/api/users', {
+      const response = await axios.post('https://todayyouuu.com/api/users', {
         username: nickname,
         password: password,
       }, {

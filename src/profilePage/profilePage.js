@@ -14,7 +14,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/users/profile/${profileId}`, {
+        const response = await axios.get(`https://todayyouuu.com/api/users/profile/${profileId}`, {
           headers: {
             'Content-Type': 'application/json',
           },
