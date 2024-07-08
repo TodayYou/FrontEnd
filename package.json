@@ -65,7 +65,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
-  "proxy": "http://backend:8080",
+  "proxy": "http://today_you_backend:8080",
 
   "eslintConfig": {
     "extends": [
@@ -137,6 +137,4 @@
   "babel": {
     "presets": [
       "react-app"
-    ]
-  }
-}
+  
